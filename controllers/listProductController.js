@@ -1,10 +1,4 @@
 
-
-// calling and establishing database connection
-// const connectDb = require('./../db/dbConfig');
-// connectDb();
-
-
 //calling Product model
 const Product = require('./../models/productModel')
 
