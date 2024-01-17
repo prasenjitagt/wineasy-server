@@ -14,8 +14,9 @@ exports.getProducts = async (req, res, next) => {
         //getting products from database
         const products = await Product.find();
 
+
         //if there are products
-        if (products) {
+        if (products.length != 0) {
             res.status(200).json(products);
         } else {
             // if there are no products
