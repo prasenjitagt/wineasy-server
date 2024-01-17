@@ -15,9 +15,6 @@ app.use(bodyParser.json());
 const router = require('./routes/routes');
 app.use('/api', router);
 
-//call database connection
-const connectDb = require('./db/dbConfig');
-const Product = require('./models/productModel');
 
 
 const port = process.env.PORT;

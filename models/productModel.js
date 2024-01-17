@@ -10,6 +10,7 @@ const productSchema = new mongoose.Schema({
     imageUrl: {
         type: String,
         required: [true, "Please provide a Image so that I can create an image url"],
+        unique: true,
     },
     price: {
         type: String,
@@ -26,6 +27,10 @@ const productSchema = new mongoose.Schema({
     description: {
         type: String,
         required: [true, "Please provide product description"],
+    },
+    isAvailable: {
+        type: Boolean,
+        required: [true, "Please provide if the product is available"],
     },
     createdAt: {
         type: Date,
