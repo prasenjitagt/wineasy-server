@@ -30,10 +30,10 @@ const storage = multer.diskStorage({
 
 
     },
-    filename: function (req, file, cb) {
+    filename: async (req, file, cb) => {
 
         //generated random Image name
-        const randomId = generateRandomId();
+        const randomId = await generateRandomId();
 
 
         // extension of the image
