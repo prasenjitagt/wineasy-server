@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
+
+const fs = require('fs');
 const path = require('path');
+
 
 // calling ramdon id generator
 const generateRandomId = require('./../helpers/randomIdGenerator');
@@ -105,12 +108,22 @@ router.post('/add-product', upload.single('file'), async (req, res) => {
 
 
 //calling controller to get products
-const getProductsController = require('./../controllers/listProductController')
+const getProductsController = require('./../controllers/listProductController');
 
 //route for getting products
 router.get('/product-list', getProductsController.getProducts);
 
 
+//router for sending photo
+router.get('/photo', async (req, res) => {
+    const path = require('path');
+    const fileName = 'thali.jpg';
+    const absolutepath = path.join(__dirname, '../../dinein/public/foodItemPics', fileName);
+    const imageBuffer = fs.readFileSync(absolutepath);
+    const base64Image = imageBuffer.toString('base64');
+
+    res.status(200).json({ image: base64Image });
+})
 
 
 module.exports = router;

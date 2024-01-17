@@ -5,6 +5,7 @@ const app = express();
 require('dotenv').config();
 
 
+
 //middlewears
 const cors = require('cors');
 app.use(cors());
