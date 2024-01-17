@@ -6,17 +6,15 @@ const path = require('path');
 // calling ramdon id generator
 const generateRandomId = require('./../helpers/randomIdGenerator');
 
-
-//initialized image name
-let finalImageName
-
-// calling database connection
+// calling and establishing database connection
 const connectDb = require('./../db/dbConfig');
 connectDb();
 
 //calling product model
 const Product = require('./../models/productModel');
 
+//initialized image name for adding product
+let finalImageName
 
 // Multer setup
 const storage = multer.diskStorage({
@@ -48,13 +46,11 @@ const storage = multer.diskStorage({
     }
 })
 
+//Multer upload function
 const upload = multer({ storage: storage })
 
 
-
-
-
-
+// route for adding product to database
 router.post('/add-product', upload.single('file'), async (req, res) => {
     try {
 
@@ -106,5 +102,15 @@ router.post('/add-product', upload.single('file'), async (req, res) => {
 
 
 })
+
+
+//calling controller to get products
+const getProductsController = require('./../controllers/listProductController')
+
+//route for getting products
+router.get('/product-list', getProductsController.getProducts);
+
+
+
 
 module.exports = router;
