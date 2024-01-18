@@ -9,6 +9,7 @@ exports.getProducts = async (req, res, next) => {
         const products = await Product.find();
 
 
+
         //if there are products
         if (products.length != 0) {
             res.status(200).json(products);
