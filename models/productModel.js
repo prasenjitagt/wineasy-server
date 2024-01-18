@@ -12,6 +12,10 @@ const productSchema = new mongoose.Schema({
         required: [true, "Please provide a Image so that I can create an image url"],
         unique: true,
     },
+    image: {
+        type: String,
+        default: 'no image yet',
+    },
     price: {
         type: String,
         required: [true, "Please provide price of product"],

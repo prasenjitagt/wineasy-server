@@ -1,5 +1,5 @@
 const crypto = require('crypto');
-const Product = require('./../models/productModel'); // Import your Product model
+const Product = require('../models/productModel'); // Import your Product model
 
 const generateRandomId = async () => {
     let randomId;

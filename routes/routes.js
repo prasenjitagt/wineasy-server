@@ -7,14 +7,14 @@ const path = require('path');
 
 
 // calling ramdon id generator
-const generateRandomId = require('./../helpers/randomIdGenerator');
+const generateRandomId = require('../helpers/randomIdGenerator');
 
 // calling and establishing database connection
-const connectDb = require('./../db/dbConfig');
+const connectDb = require('../db/dbConfig.js');
 connectDb();
 
 //calling product model
-const Product = require('./../models/productModel');
+const Product = require('../models/productModel');
 
 //initialized image name for adding product
 let finalImageName
@@ -108,7 +108,7 @@ router.post('/add-product', upload.single('file'), async (req, res) => {
 
 
 //calling controller to get products
-const getProductsController = require('./../controllers/listProductController');
+const getProductsController = require('../controllers/listProductController.ts');
 
 //route for getting products
 router.get('/product-list', getProductsController.getProducts);
