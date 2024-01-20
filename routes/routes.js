@@ -108,22 +108,24 @@ router.post('/add-product', upload.single('file'), async (req, res) => {
 
 
 //calling controller to get products
-const getProductsController = require('../controllers/listProductController.ts');
-
+const listProductController = require('../controllers/listProductController');
 //route for getting products
-router.get('/product-list', getProductsController.getProducts);
+router.get('/product-list', listProductController.getProducts);
 
 
-//router for sending photo
-router.get('/photo', async (req, res) => {
-    const path = require('path');
-    const fileName = 'thali.jpg';
-    const absolutepath = path.join(__dirname, '../../dinein/public/foodItemPics', fileName);
-    const imageBuffer = fs.readFileSync(absolutepath);
-    const base64Image = imageBuffer.toString('base64');
 
-    res.status(200).json({ image: base64Image });
-})
+//calling controller to delete products
+const deleteProductController = require('../controllers/deleteProductController');
+//route for deleting products
+router.delete('/delete-product', deleteProductController.deleteProduct);
+
+
+
+//calling controller to chage isAvailable in products model
+const isAvailableController = require('../controllers/isAvailableController.js');
+//route for deleting products
+router.put('/is-available', isAvailableController.isAvailable);
+
 
 
 module.exports = router;
