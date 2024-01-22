@@ -105,24 +105,6 @@ router.post('/add-product', upload.single('file'), async (req, res) => {
 })
 
 
-//calling controller to get products
-const listProductController = require('../controllers/listProductController.js');
-//route for getting products
-router.get('/product-list', listProductController.getProducts);
-
-
-
-//calling controller to delete products
-const deleteProductController = require('../controllers/deleteProductController.js');
-//route for deleting products
-router.delete('/delete-product', deleteProductController.deleteProduct);
-
-
-
-//calling controller to chage isAvailable in products model
-const isAvailableController = require('../controllers/isAvailableController.js');
-//route for changing is Product Avaiable state
-router.put('/is-available', isAvailableController.isAvailable);
 
 
 
@@ -244,6 +226,37 @@ router.post('/edit-product', upload.single('file'), async (req, res) => {
 
 
 });
+
+
+
+
+//calling controller to get products
+const listProductController = require('../controllers/listProductController.js');
+//route for getting products
+router.get('/product-list', listProductController.getProducts);
+
+
+
+//calling controller to delete products
+const deleteProductController = require('../controllers/deleteProductController.js');
+//route for deleting products
+router.delete('/delete-product', deleteProductController.deleteProduct);
+
+
+
+//calling controller to chage isAvailable in products model
+const isAvailableController = require('../controllers/isAvailableController.js');
+//route for changing is Product Avaiable state
+router.put('/is-available', isAvailableController.isAvailable);
+
+
+
+//calling controller to chage isAvailable in products model
+const addCategoryController = require('../controllers/addCategoryController.js');
+//route for deleting products
+router.post('/add-category', addCategoryController.addCategory);
+
+
 
 
 
