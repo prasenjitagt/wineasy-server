@@ -43,14 +43,26 @@ exports.isAvailable = async (req, res, next) => {
 
 
 
-    } catch (error) {
+    } catch ({ name, kind, message }) {
+
+        const errorObject = {
+            ERROR_MESSAGE: `ERROR IN isAvailableController.js : ${message}`,
+            ERROR_NAME: name,
+            ERROR_KIND: kind,
+        };
+
         // Log the error for debugging purposes
-        console.error('Error in isAvailable:', error);
+        console.error(errorObject);
+
+
         // Check for specific error types and respond accordingly
-        if (error.name === 'CastError' && error.kind === 'ObjectId') {
+        if (name === 'CastError' && kind === 'ObjectId') {
             // Handle invalid ObjectId format
             res.status(400).json({ message: 'Invalid product ID format' });
-        } else {
+        } else if (name === "TypeError") {
+            res.status(400).json({ message: 'Invalid product ID Type' });
+        }
+        else {
             // Generic server error
             res.status(500).json({ message: 'Unexpected server error' });
         }
