@@ -14,22 +14,31 @@ exports.addCategory = async (req, res, next) => {
 
         const categoryUpperCased = category.toUpperCase();
 
-        // const categoryIfExists = Category.findOne
+        // setting which category to search
+        const filter = { categoryName: categoryUpperCased };
+
+        //checking if the category already exists
+        const categoryIfExists = await Category.findOne(filter);
 
 
 
-        //Creating New Category
-        const newCategory = new Category({
-            categoryName: categoryUpperCased,
-            createdAt: Date.now(),
-            updatedAt: Date.now(),
-        });
+        if (categoryIfExists) {
+            res.status(403).json({ message: "category already exists" });
+        } else {
+
+            //Creating New Category
+            const newCategory = new Category({
+                categoryName: categoryUpperCased,
+                createdAt: Date.now(),
+                updatedAt: Date.now(),
+            });
 
 
-        //saving to data
-        await newCategory.save();
+            //saving to database
+            await newCategory.save();
 
-        res.status(200).json({ message: "data received successfully" });
+            res.status(200).json({ message: "cate saved" });
+        }
 
 
     } catch ({ name, kind, message, type }) {
