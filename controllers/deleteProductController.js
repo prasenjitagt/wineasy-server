@@ -47,11 +47,13 @@ exports.deleteProduct = async (req, res, next) => {
                         console.log('Image deleted successfully');
                     }
                 });
-            } catch ({ name, kind, message, stack }) {
+            } catch ({ name, kind, message, type }) {
                 const errorObject = {
                     ERROR_MESSAGE: `ERROR IN deleteProductController.js IMAGE DELETION: ${message}`,
                     ERROR_NAME: name,
                     ERROR_KIND: kind,
+                    ERROR_TYPE: type,
+
                 };
 
                 // Log the error for debugging purposes
@@ -69,13 +71,14 @@ exports.deleteProduct = async (req, res, next) => {
 
 
 
-    } catch ({ name, kind, message, stack }) {
+    } catch ({ name, kind, message, type }) {
 
 
         const errorObject = {
             ERROR_MESSAGE: `ERROR IN deleteProductController.js : ${message}`,
             ERROR_NAME: name,
             ERROR_KIND: kind,
+            ERROR_TYPE: type,
         };
 
         // Log the error for debugging purposes

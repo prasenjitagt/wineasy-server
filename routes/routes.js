@@ -175,11 +175,13 @@ router.post('/edit-product', upload.single('file'), async (req, res) => {
                         console.log('Image deleted successfully');
                     }
                 });
-            } catch ({ name, kind, message, stack }) {
+            } catch ({ name, kind, message, type }) {
                 const errorObject = {
                     ERROR_MESSAGE: `ERROR IN routes.js (/edit-product) IMAGE DELETION: ${message}`,
                     ERROR_NAME: name,
                     ERROR_KIND: kind,
+                    ERROR_TYPE: type,
+
                 };
 
                 // Log the error for debugging purposes
@@ -194,13 +196,15 @@ router.post('/edit-product', upload.single('file'), async (req, res) => {
 
         }
 
-    } catch ({ name, kind, message, stack }) {
+    } catch ({ name, kind, message, type }) {
 
 
         const errorObject = {
             ERROR_MESSAGE: `ERROR IN routes.js (/edit-product) : ${message}`,
             ERROR_NAME: name,
             ERROR_KIND: kind,
+            ERROR_TYPE: type,
+
         };
 
         // Log the error for debugging purposes
@@ -251,13 +255,18 @@ router.put('/is-available', isAvailableController.isAvailable);
 
 
 
-//calling controller to chage isAvailable in products model
+//calling controller to add Category in catagories model
 const addCategoryController = require('../controllers/addCategoryController.js');
-//route for deleting products
+//route for adding Categories
 router.post('/add-category', addCategoryController.addCategory);
 
 
 
+
+//calling controller to get Categories in catagories model
+const categoryListController = require('../controllers/categoryListController.js');
+//route for getting Categories
+router.get('/get-categories', categoryListController.getCategories);
 
 
 

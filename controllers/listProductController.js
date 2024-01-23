@@ -4,6 +4,8 @@ const encodeImageToBase64 = require('../helpers/imageToBase64');
 
 exports.getProducts = async (req, res, next) => {
     try {
+
+        //getting products from mongdb
         const products = await Product.find();
 
         if (products.length !== 0) {
@@ -35,13 +37,14 @@ exports.getProducts = async (req, res, next) => {
         } else {
             res.status(204).json({ message: 'No products found' });
         }
-    } catch ({ name, kind, message }) {
+    } catch ({ name, kind, message, type }) {
 
 
         const errorObject = {
             ERROR_MESSAGE: `ERROR IN listProductController.js : ${message}`,
             ERROR_NAME: name,
             ERROR_KIND: kind,
+            ERROR_TYPE: type,
         };
 
         // Log the error for debugging purposes

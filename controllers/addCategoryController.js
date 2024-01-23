@@ -29,13 +29,14 @@ exports.addCategory = async (req, res, next) => {
         res.status(200).json({ message: "data received successfully" });
 
 
-    } catch ({ name, kind, message, stack }) {
+    } catch ({ name, kind, message, type }) {
 
 
         const errorObject = {
             ERROR_MESSAGE: `ERROR IN addCategoryController.js : ${message}`,
             ERROR_NAME: name,
             ERROR_KIND: kind,
+            ERROR_TYPE: type,
         };
 
         // Log the error for debugging purposes
