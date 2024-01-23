@@ -23,7 +23,7 @@ exports.addCategory = async (req, res, next) => {
 
 
         if (categoryIfExists) {
-            res.status(403).json({ message: "category already exists" });
+            res.status(205).json({ message: "category already exists" });
         } else {
 
             //Creating New Category
@@ -37,7 +37,7 @@ exports.addCategory = async (req, res, next) => {
             //saving to database
             await newCategory.save();
 
-            res.status(200).json({ message: "cate saved" });
+            res.status(200).json({ message: "category saved" });
         }
 
 
