@@ -14,6 +14,9 @@ exports.addCategory = async (req, res, next) => {
 
         const categoryUpperCased = category.toUpperCase();
 
+        // const categoryIfExists = Category.findOne
+
+
 
         //Creating New Category
         const newCategory = new Category({
