@@ -271,6 +271,13 @@ router.get('/get-categories', categoryListController.getCategories);
 
 
 
+//calling controller to delete products
+const deleteCategoryController = require('../controllers/deleteCategoryController.js');
+//route for deleting products
+router.delete('/delete-category', deleteCategoryController.deleteCategory);
+
+
+
 
 
 module.exports = router;
