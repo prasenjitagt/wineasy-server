@@ -34,7 +34,7 @@ const saveBase64Image = async (base64String, relativePathtoNextJsFolder, imageNa
                 // Log the error for debugging purposes
                 console.error(errorObject);
             } else {
-                console.log('Image saved successfully:', absolutePath);
+                console.log('Category Image saved successfully');
 
             }
         });
