@@ -7,6 +7,11 @@ const categorySchema = new mongoose.Schema({
         required: [true, "Please provide a category name"],
         unique: true,
     },
+    imageUrl: {
+        type: String,
+        required: [true, "Please provide a Image so that I can create an image url"],
+        unique: true,
+    },
     createdAt: {
         type: Date,
         required: [true, "When was the category created"],

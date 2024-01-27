@@ -1,17 +1,60 @@
 
 
+const path = require('path');
+
+
 //calling category model
 const Category = require('../models/productCategoryModel');
+
+// calling ramdon id generator
+const generateRandomId = require('../helpers/randomIdGenerator');
+
+//calling base64ToimageAndSave fucntion
+const saveBase64Image = require('../helpers/base64ToImage');
+
+//initialized image name for adding product
+let finalImageName;
+
+
 
 
 
 exports.addCategory = async (req, res, next) => {
     try {
-
-
         //Getting the category from frontend
-        const { category } = await req.body;
+        const { category, categoryImage, imageName } = await req.body;
 
+
+
+        //generated random Image name
+        const randomId = await generateRandomId();
+
+
+        // extension of the image
+        const imageExtenstion = path.extname(imageName);
+
+
+        finalImageName = randomId + imageExtenstion;
+
+        // folderPath to next js image folder
+        const folderPath = '../../dinein/public/catagoryPics';
+
+
+        //saving the image
+        await saveBase64Image(categoryImage, folderPath, finalImageName);
+
+
+        //location of image from Next js point of view
+        const locationOfImage = "/catagoryPics/";
+
+        //Image path that is save to be in database
+        const imageUrlforDb = locationOfImage + finalImageName;
+
+
+
+
+
+        //converting the category name to uppercase 
         const categoryUpperCased = category.toUpperCase();
 
         // setting which category to search
@@ -29,6 +72,7 @@ exports.addCategory = async (req, res, next) => {
             //Creating New Category
             const newCategory = new Category({
                 categoryName: categoryUpperCased,
+                imageUrl: imageUrlforDb,
                 createdAt: Date.now(),
                 updatedAt: Date.now(),
             });

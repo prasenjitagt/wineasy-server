@@ -17,7 +17,7 @@ connectDb();
 const Product = require('../models/productModel');
 
 //initialized image name for adding product
-let finalImageName
+let finalImageName;
 
 // Multer setup
 const storage = multer.diskStorage({
@@ -161,11 +161,11 @@ router.post('/edit-product', upload.single('file'), async (req, res) => {
             const imageFileName = path.basename(imageFilePath);
 
 
-            //path from to next js image folder
-            const pathfromNextjs = '../../dinein/public/foodItemPics';
+            //path to next js image folder
+            const pathtoNextjsImageFolder = '../../dinein/public/foodItemPics';
 
             //creating the absolute path to get the image
-            const absolutePath = path.join(__dirname, pathfromNextjs, imageFileName);
+            const absolutePath = path.join(__dirname, pathtoNextjsImageFolder, imageFileName);
 
             try {
                 fs.unlink(absolutePath, (fsError) => {

@@ -33,7 +33,7 @@ exports.deleteProduct = async (req, res, next) => {
             const imageFileName = path.basename(imageFilePath);
 
 
-            //path from to next js image folder
+            //path to next js image folder
             const pathfromNextjs = '../../dinein/public/foodItemPics';
 
             //creating the absolute path to get the image
