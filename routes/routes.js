@@ -279,5 +279,17 @@ router.delete('/delete-category', deleteCategoryController.deleteCategory);
 
 
 
+//calling controller to edit gst
+const editGstController = require('../controllers/editGstController.js');
+//route for editing gst
+router.post('/edit-gst', editGstController.editGst);
+
+
+
+//calling controller to get gst
+const getGstController = require('../controllers/getGstController.js');
+//router for getting gst details
+router.get('/get-gst', getGstController.getGst);
+
 
 module.exports = router;
