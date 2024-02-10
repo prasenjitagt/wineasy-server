@@ -292,4 +292,20 @@ const getGstController = require('../controllers/getGstController.js');
 router.get('/get-gst', getGstController.getGst);
 
 
+//calling controller for food ready signal
+const foodReadyController = require('../controllers/foodReadyController.js');
+//router for sending food ready signal to DB
+router.put('/food-ready', foodReadyController.foodReady);
+
+
+
+//calling controller for food canceled signal
+const foodCanceledController = require('../controllers/foodCanceledController.js');
+//router for sending food ready signal to DB
+router.put('/food-canceled', foodCanceledController.foodCanceled);
+
+
+
+
+
 module.exports = router;

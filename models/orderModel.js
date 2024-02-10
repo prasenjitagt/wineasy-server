@@ -2,6 +2,16 @@ const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
 
+    orderId: {
+        type: Number,
+        required: [true, "Unique Order ID is Mandatory"],
+        unique: true,
+    },
+
+    orderItems: {
+        type: mongoose.Schema.Types.Mixed,
+        require: [true, "Order Items is Mandatory"],
+    },
 
 
     orderStatus: {

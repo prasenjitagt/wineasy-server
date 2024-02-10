@@ -35,7 +35,8 @@ app.use('/api', router);
 
 
 
-
+//Importing Order Model
+const Order = require('./models/orderModel');
 //socket io for sending and recieving orders instantly
 const { Server } = require('socket.io');
 const io = new Server(httpServer, {
@@ -56,17 +57,55 @@ io.on("connection", (socket) => {
 
     socket.on('orderFromClient', async (cartItemsAndCount) => {
 
-        const currentDate = new Date();
-        let currentTime = currentDate.toLocaleTimeString();
+        try {
 
-        //converting to hours and minutes and uppercased AM and PM
-        currentTime = currentTime.slice(0, 8) + currentTime.slice(8, currentTime.length).toUpperCase();
-
-        //creating order to send
-        const orderWithTime = [cartItemsAndCount, { orderedAt: currentTime }];
+            //generating a unique ID for Order Identification
+            const uniqueId = Math.floor(Math.random() * Math.floor(Math.random() * Date.now()));
 
 
-        io.emit('orderToKitchen', orderWithTime);
+            //Getting the Exact Time of Order
+            const currentDate = new Date();
+            let currentTime = currentDate.toLocaleTimeString();
+
+
+            //converting to hours and minutes and uppercased AM and PM
+            currentTime = currentTime.slice(0, 8) + currentTime.slice(8, currentTime.length).toUpperCase();
+
+
+
+            //creating order to send
+            const orderWithTime = [cartItemsAndCount, { orderedAt: currentTime, uniqueId: uniqueId }];
+
+            //setting the value to send in MongoDB
+            const newOrder = new Order({
+
+                orderId: uniqueId,
+                orderItems: cartItemsAndCount,
+                orderStatus: "pending",
+                createdAt: Date.now(),
+                updatedAt: Date.now(),
+            })
+
+            //Saving in DB
+            const savedOrder = await newOrder.save();
+
+            //If Save Successfull then Send to Frontend
+            if (savedOrder) {
+                io.emit('orderToKitchen', orderWithTime);
+            }
+
+
+        } catch ({ name, kind, message, type }) {
+            const errorObject = {
+                ERROR_MESSAGE: `ERROR IN addCategoryController.js : ${message}`,
+                ERROR_NAME: name,
+                ERROR_KIND: kind,
+                ERROR_TYPE: type,
+            };
+
+            // Log the error for debugging purposes
+            console.error(errorObject);
+        }
     })
 
 
