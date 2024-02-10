@@ -54,12 +54,19 @@ io.on("connection", (socket) => {
 
     console.log(socket.id, 'connected at', Date.now());
 
-    socket.on('orderFromClient', (cartItemsAndCount) => {
+    socket.on('orderFromClient', async (cartItemsAndCount) => {
 
-        console.log(`order Placed`);
+        const currentDate = new Date();
+        let currentTime = currentDate.toLocaleTimeString();
+
+        //converting to hours and minutes and uppercased AM and PM
+        currentTime = currentTime.slice(0, 8) + currentTime.slice(8, currentTime.length).toUpperCase();
+
+        //creating order to send
+        const orderWithTime = [cartItemsAndCount, { orderedAt: currentTime }];
 
 
-        io.emit('orderToKitchen', cartItemsAndCount);
+        io.emit('orderToKitchen', orderWithTime);
     })
 
 
