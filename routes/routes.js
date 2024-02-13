@@ -305,7 +305,10 @@ const foodCanceledController = require('../controllers/foodCanceledController.js
 router.put('/food-canceled', foodCanceledController.foodCanceled);
 
 
-
+//calling controller to get order details
+const getSalesController = require('../controllers/getSalesController.js');
+//router for getting all order details
+router.get('/get-sales', getSalesController.getSales);
 
 
 module.exports = router;
