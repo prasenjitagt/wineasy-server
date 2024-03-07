@@ -74,7 +74,7 @@ io.on("connection", (socket) => {
 
 
             //creating order to send
-            const orderWithTime = [cartItemsAndCount, { orderedAt: currentTime, uniqueId: uniqueId }];
+            const orderWithTime = [cartItemsAndCount, { orderedAt: currentTime, uniqueId: uniqueId, orderStatus: "pending" }];
 
             //setting the value to send in MongoDB
             const newOrder = new Order({
